@@ -18,7 +18,8 @@ echo_info "[+] END Copying SSH key"
 # Installing packages
 echo_info "[+] START Installing packages"
 sudo apt-get -y update
-sudo apt-get -y install curl git vim build-essential libssl-dev libseccomp-dev pkg-config docker.io
+sudo apt-get -y install curl git vim build-essential cmake unzip libboost-all-dev libreadline-dev libssl-dev libseccomp-dev pkg-config docker.io python3 python3-pip
+pip3 install frida frida-tools distorm3
 
 sudo usermod -aG docker vagrant
 echo_info "[+] END Installing packages"
@@ -47,10 +48,23 @@ sudo make install
 export PATH=$PATH:$GOPATH/src/github.com/opencontainers
 echo_info "[+] END Installing runc"
 
+# Installing funchook
+echo_info "[+] START Installing funchook"
+cd /home/vagrant
+
+wget -O /tmp/funchook-1.1.2.zip https://github.com/kubo/funchook/releases/download/v1.1.2/funchook-1.1.2.zip
+unzip /tmp/funchook-1.1.2.zip
+rm /tmp/funchook-1.1.2.zip
+
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local funchook-1.1.2
+sudo bash -c "make && make install"
+sudo ldconfig
+echo_info "[+] END Installing funchook"
+
 # Cloning all repos
 echo_info "[+] START Cloning repositories"
 git clone https://github.com/axelcurmi/SEcube-Samples.git /home/vagrant/SEcube-Samples
-git clone https://gitlab.eif.urjc.es/esoriano/sealfs.git /home/vagrant/sealfs
+git clone git@github.com:axelcurmi/sealfs-fork.git /home/vagrant/sealfs
 git clone git@github.com:robert-abela/GKE.git /home/vagrant/GKE
 echo_info "[+] END Cloning repositories"
 
@@ -70,6 +84,11 @@ cd runc
 container_id=$(sudo docker create gke)
 sudo docker export ${container_id} | tar -C rootfs -xf -
 sudo docker rm ${container_id}
+
+cp -r /home/vagrant/SEcube-Samples GKE/runc/rootfs/root/
+
+cd /home/vagrant/GKE/GKE
+./compile.sh
 echo_info "[+] END Setting up GKE with runc"
 
 # Setting up GKE repeater
@@ -89,7 +108,7 @@ sudo bash -c "cd tools && make"
 
 sudo insmod module/sealfs.ko
 sudo mkdir -p /var/lib/SealFS/{keys,logs}
-sudo tools/prep /var/lib/SealFS/logs/.SEALFS.LOG /var/lib/SealFS/keys/k1 /var/lib/SealFS/keys/k2 $KEYSTREAM_SIZE
+sudo tools/prep /var/lib/SealFS/logs/.SEALFS.LOG /var/lib/SealFS/keys/k1 /var/lib/SealFS/keys/k2 $KEYSTREAM_SIZE 0
 sudo mount -o kpath=/var/lib/SealFS/keys/k1,nratchet=2048 -t sealfs /var/lib/SealFS/logs /var/log/GKE
 echo_info "[+] END Setting up SealFS"
 
