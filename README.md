@@ -1,5 +1,12 @@
 # Runtime Verification for Trustworthy Computing
 
+## Pre-requisites
+1. VirtualBox + VirtualBox Extension Pack installed
+2. SSH key set with GitHub account and private key copied to `data/dot-ssh` directory
+3. Access to the following repositories:
+    - https://github.com/axelcurmi/sealfs-fork
+    - https://github.com/robert-abela/GKE
+
 ## Commands
 ```bash
 vagrant up      # to create VM
