@@ -80,5 +80,17 @@ sudo docker run -d -p 8888:8888 repeater
 echo_info "[+] END Setting up GKE repeater"
 
 # Setting up SealFS (TODO: Update this section to make use of my own sealfs fork)
+KEYSTREAM_SIZE=100000000
+echo_info "[+] START Setting up SealFS"
+cd /home/vagrant/sealfs
+
+sudo bash -c "cd module && make"
+sudo bash -c "cd tools && make"
+
+sudo insmod module/sealfs.ko
+sudo mkdir -p /var/lib/SealFS/{keys,logs}
+sudo tools/prep /var/lib/SealFS/logs/.SEALFS.LOG /var/lib/SealFS/keys/k1 /var/lib/SealFS/keys/k2 $KEYSTREAM_SIZE
+sudo mount -o kpath=/var/lib/SealFS/keys/k1,nratchet=2048 -t sealfs /var/lib/SealFS/logs /var/log/GKE
+echo_info "[+] END Setting up SealFS"
 
 echo_info "[+] END UMVBox bootstrap"
