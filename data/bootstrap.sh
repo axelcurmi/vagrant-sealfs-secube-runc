@@ -108,8 +108,6 @@ sudo bash -c "cd tools && make"
 
 sudo insmod module/sealfs.ko
 sudo mkdir -p /var/lib/SealFS/{keys,logs}
-sudo tools/prep /var/lib/SealFS/logs/.SEALFS.LOG /var/lib/SealFS/keys/k1 /var/lib/SealFS/keys/k2 $KEYSTREAM_SIZE 0
-sudo mount -o kpath=/var/lib/SealFS/keys/k1,nratchet=2048 -t sealfs /var/lib/SealFS/logs /var/log/GKE
 echo_info "[+] END Setting up SealFS"
 
 echo_info "[+] END UMVBox bootstrap"

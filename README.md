@@ -17,6 +17,7 @@ vagrant destroy # to destroy the VM
 /data/bootstrap.sh      # a sets up the whole setup (i.e., SealFS, GKE via runc)
 /data/mount-secube.sh   # mounts the SEcube into '/media/SECube'
 /data/umount-secube.sh  # unmounts the SECube
+/data/prep-sealfs.sh    # executes the 'prep' tool from the SealFS toolkit (keysize and boolean value for SEcube need to be provided as arguments)
 /data/mount-sealfs.sh   # mounts the SealFS into '/var/log/GKE'
 /data/umount-sealfs.sh  # unmounts the SealFS
 
