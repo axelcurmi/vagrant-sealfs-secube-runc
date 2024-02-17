@@ -9,4 +9,6 @@ function echo_info {
 
 echo_info "[+] START SealFS umount"
 sudo umount /var/log/GKE
+ls -al /var/log/GKE
+mount -l | grep /var/log/GKE
 echo_info "[+] END SealFS umount"

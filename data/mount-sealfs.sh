@@ -9,4 +9,6 @@ function echo_info {
 
 echo_info "[+] START SealFS mount"
 sudo mount -o kpath=/var/lib/SealFS/keys/k1,nratchet=2048 -t sealfs /var/lib/SealFS/logs /var/log/GKE
+ls -al /var/log/GKE
+mount -l | grep /var/log/GKE
 echo_info "[+] END SealFS mount"

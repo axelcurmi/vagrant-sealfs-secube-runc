@@ -10,4 +10,6 @@ function echo_info {
 echo_info "[+] START SECube umount"
 sudo umount /media/SECube
 sudo rm -rf /media/SECube
+ls -al /media
+mount -l | grep /media/SECube
 echo_info "[+] END SECube umount"

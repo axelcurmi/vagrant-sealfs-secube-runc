@@ -10,4 +10,6 @@ function echo_info {
 echo_info "[+] START SECube mount"
 sudo mkdir /media/SECube
 sudo mount -t vfat /dev/sdc1 /media/SECube
+ls -al /media/SECube
+mount -l | grep /media/SECube
 echo_info "[+] END SECube mount"
