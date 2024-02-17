@@ -35,3 +35,21 @@ sudo runc run gke
 # Once inside the runc container
 ./chat_hooked --id <ID> --repeater <IP> --pin <PIN> # to run the hooked chat application with SECube
 ```
+
+## Generic command order
+```bash
+vagrant up
+vagrant ssh
+
+# Once inside the VM
+/data/bootstrap.sh
+/data/mount-secube.sh
+/data/prep-sealfs.sh 100000 1
+/data/mount-sealfs.sh
+
+cd ~/GKE/runc
+sudo runc run gke
+
+# Once inside the runc
+./chat_hooked --id 1 --repeater 10.0.2.15 --pin test
+```

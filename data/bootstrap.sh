@@ -18,7 +18,7 @@ echo_info "[+] END Copying SSH key"
 # Installing packages
 echo_info "[+] START Installing packages"
 sudo apt-get -y update
-sudo apt-get -y install curl git vim build-essential cmake unzip libboost-all-dev libreadline-dev libssl-dev libseccomp-dev pkg-config docker.io python3 python3-pip
+sudo apt-get -y install curl git vim build-essential cmake gdb unzip libboost-all-dev libreadline-dev libssl-dev libseccomp-dev pkg-config docker.io python3 python3-pip
 pip3 install frida frida-tools distorm3
 
 sudo usermod -aG docker vagrant
@@ -109,5 +109,7 @@ sudo bash -c "cd tools && make"
 sudo insmod module/sealfs.ko
 sudo mkdir -p /var/lib/SealFS/{keys,logs}
 echo_info "[+] END Setting up SealFS"
+
+ip a
 
 echo_info "[+] END UMVBox bootstrap"
