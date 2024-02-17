@@ -7,7 +7,7 @@
     - https://github.com/axelcurmi/sealfs-fork
     - https://github.com/robert-abela/GKE
 
-## Commands
+## Useful commands
 ```bash
 vagrant up      # to create VM
 vagrant ssh     # to SSH into the VM using the user 'vagrant'
@@ -37,7 +37,7 @@ sudo runc run gke
 ./chat_hooked --id <ID> --repeater <IP> --pin <PIN> # to run the hooked chat application with SECube
 ```
 
-## Generic command order
+## Setup command order
 ```bash
 vagrant up
 vagrant ssh
