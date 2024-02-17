@@ -18,6 +18,7 @@ vagrant destroy # to destroy the VM
 /data/mount-secube.sh   # mounts the SEcube into '/media/SECube'
 /data/umount-secube.sh  # unmounts the SECube
 /data/prep-sealfs.sh    # executes the 'prep' tool from the SealFS toolkit (keysize and boolean value for SEcube need to be provided as arguments)
+/data/verify-sealfs.sh  # executes the 'verify' tool from the SealFS toolit
 /data/mount-sealfs.sh   # mounts the SealFS into '/var/log/GKE'
 /data/umount-sealfs.sh  # unmounts the SealFS
 
@@ -51,5 +52,11 @@ cd ~/GKE/runc
 sudo runc run gke
 
 # Once inside the runc
-./chat_hooked --id 1 --repeater 10.0.2.15 --pin test
+# ./chat_hooked --id 1 --repeater 10.0.2.15 --pin test # At the moment GKE + SECube does not work 
+./chat_hooked --id 1 --repeater 10.0.2.15
+
+# ... perform chat operations ...
+
+/data/umount-sealfs.sh
+/data/verify-sealfs.sh
 ```

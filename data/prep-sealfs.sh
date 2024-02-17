@@ -1,5 +1,4 @@
 #!/bin/bash
-
 if [ "$#" -ne 2 ]; then
     echo "usage: $0 keysize secube[0/1]";
     exit 1;
