@@ -71,7 +71,6 @@ echo_info "[+] END Cloning repositories"
 # Setting up GKE
 echo_info "[+] START Setting up GKE with runc"
 cd /home/vagrant/GKE
-git checkout add-runc # Switch to 'add-runc' branch; eventually this line will be removed once the branch is merged into master
 
 sudo mkdir /var/log/GKE
 sudo chown vagrant:vagrant /var/log/GKE
@@ -102,6 +101,7 @@ echo_info "[+] END Setting up GKE repeater"
 KEYSTREAM_SIZE=100000000
 echo_info "[+] START Setting up SealFS"
 cd /home/vagrant/sealfs
+git checkout secube
 
 sudo bash -c "cd module && make"
 sudo bash -c "cd tools && make"
