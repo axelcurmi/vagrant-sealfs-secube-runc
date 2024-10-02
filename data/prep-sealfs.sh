@@ -6,5 +6,5 @@ fi
 
 KEYSIZE=$1
 
-sudo /home/vagrant/sealfs/tools/secube_prep /var/lib/SealFS/logs/.SEALFS.LOG /var/lib/SealFS/keys/k1 /var/lib/SealFS/keys/k2 $KEYSIZE
+sudo /home/vagrant/sealfs/tools/prep /var/lib/SealFS/logs/.SEALFS.LOG /var/lib/SealFS/keys/k1 /var/lib/SealFS/keys/k2 $KEYSIZE
 ls -alR /var/lib/SealFS
