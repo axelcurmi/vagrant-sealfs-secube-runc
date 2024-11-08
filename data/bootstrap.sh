@@ -4,7 +4,7 @@ GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
 function echo_info {
-    echo -e "${GREEN}${1}${NC}"
+    	echo -e "${GREEN}${1}${NC}"
 }
 
 echo_info "[+] START UMVBox bootstrap"
